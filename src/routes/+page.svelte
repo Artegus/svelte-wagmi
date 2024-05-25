@@ -1,2 +1,16 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script lang="ts" >
+    import { walletStore } from "$lib/wallet";
+
+</script>
+
+{#if $walletStore.isConnected}
+    <p>Connected</p>
+    <div>
+        <p>Address: {$walletStore.address}</p>
+        <p>Connected on: {$walletStore.chain?.name}</p>
+    </div>
+{:else}
+    <button on:click={walletStore.connect}>
+        Connect wallet
+    </button>
+{/if}
